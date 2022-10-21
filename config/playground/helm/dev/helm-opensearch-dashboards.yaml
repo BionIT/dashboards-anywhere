@@ -41,13 +41,34 @@ extraEnvs: []
 
 envFrom: []
 
-extraVolumes: []
+extraVolumes:
+  - name: plugins
+    configMap:
+      name: {{ include "common.names.fullname" . }}-plugins
+      defaultMode: 493
 
-extraVolumeMounts: []
+extraVolumeMounts:
+  - name: plugins
+    mountPath: /opt/opensearch/plugins/
+    readOnly: false
 
 extraInitContainers: ""
 
 extraContainers: ""
+
+extraConfiguration:
+  #tracking id
+  "google_analytics_plugin.trackingID": ""
+   # allow to connect to google analytics site and maps site
+  "csp.rules": ["connect-src 'self' www.google-analytics.com maps.opensearch.org;"]
+  # suppress legacy browser warning
+  "csp.warnLegacyBrowsers": false
+
+plugins: ['https://github.com/BionIT/google-analytics-plugin/releases/download/2.3.0/googleAnalytics-2.3.0.zip']
+
+command:
+  - ./opt/opensearch/plugins/install-plugins.sh
+  - ./opensearch-dashboards-docker-entrypoint.sh opensearch-dashboards
 
 podSecurityContext: {}
 
