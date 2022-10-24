@@ -52,5 +52,6 @@ jobs:
             helm uninstall opensearch --namespace default
             helm uninstall dashboards --namespace default
             kubectl delete pvc --all
-            helm install opensearch opensearch/opensearch -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch.yaml --version 2.3.0
-            helm install dashboards opensearch/opensearch-dashboards -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml --version 2.3.0
+            
+            helm install opensearch opensearch/opensearch -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch.yaml
+            helm install dashboards opensearch/opensearch-dashboards -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml

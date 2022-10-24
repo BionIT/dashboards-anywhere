@@ -9,9 +9,9 @@ opensearchHosts: "https://opensearch-cluster-leader:9200"
 replicaCount: 2
 
 image:
-  repository: "opensearchproject/opensearch-dashboards"
+  repository: "joycelulu/opensearch-dashboards"
   # override image tag, which is .Chart.AppVersion by default
-  tag: ""
+  tag: "latest"
   pullPolicy: "IfNotPresent"
 
 imagePullSecrets: []
@@ -41,34 +41,15 @@ extraEnvs: []
 
 envFrom: []
 
-extraVolumes:
-  - name: plugins
-    configMap:
-      name: {{ include "common.names.fullname" . }}-plugins
-      defaultMode: 493
+extraVolumes: []
 
-extraVolumeMounts:
-  - name: plugins
-    mountPath: /opt/opensearch/plugins/
-    readOnly: false
+extraVolumeMounts: []
 
 extraInitContainers: ""
 
 extraContainers: ""
 
 extraConfiguration:
-  #tracking id
-  "google_analytics_plugin.trackingID": ""
-   # allow to connect to google analytics site and maps site
-  "csp.rules": ["connect-src 'self' www.google-analytics.com maps.opensearch.org;"]
-  # suppress legacy browser warning
-  "csp.warnLegacyBrowsers": false
-
-plugins: ['https://github.com/BionIT/google-analytics-plugin/releases/download/2.3.0/googleAnalytics-2.3.0.zip']
-
-command:
-  - ./opt/opensearch/plugins/install-plugins.sh
-  - ./opensearch-dashboards-docker-entrypoint.sh opensearch-dashboards
 
 podSecurityContext: {}
 
@@ -141,8 +122,8 @@ ingress:
 
 resources:
   requests:
-    cpu: "1"
-    memory: "8G"
+    cpu: "0.5"
+    memory: "0.5G"
   limits:
     cpu: "3"
     memory: "24G"
