@@ -2,16 +2,9 @@ name: OpenSearch Dashboards Build Custom Docker Image
 
 on:
   workflow_dispatch:
-    inputs:
-      plugins:
-        required: false
-        type: string
-      secrets:
-        required: false
-        type: string
 
 jobs:
-  Build-Override-Docker-Image:
+  Build-Custom-Docker-Image:
     runs-on: ubuntu-latest
 
     steps:
