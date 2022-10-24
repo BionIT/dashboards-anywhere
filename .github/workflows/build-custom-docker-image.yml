@@ -1,4 +1,4 @@
-name: OpenSearch Dashboards Build Override Docker Image
+name: OpenSearch Dashboards Build Custom Docker Image
 
 on:
   workflow_dispatch:
