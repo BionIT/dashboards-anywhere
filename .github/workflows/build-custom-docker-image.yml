@@ -23,12 +23,7 @@ jobs:
 
       - name: Build and push
         run:  |
-          chmod -R 755 config/playground/docker/dev/scripts/
-          docker build -t joycelulu/opensearch-dashboards:2.3.0 config/playground/docker/dev
-          docker push joycelulu/opensearch-dashboards:2.3.0
-#        uses: docker/build-push-action@v3
-#        with:
-#          context: config/playground/docker/dev/
-#          push: true
-#          tags: joycelulu/opensearch-dashboards:2.3.0
+          chmod -R 777 config/playground/docker/dev/scripts/
+          docker build -t joycelulu/opensearch-dashboards:2.3.1 config/playground/docker/dev
+          docker push joycelulu/opensearch-dashboards:2.3.1
 

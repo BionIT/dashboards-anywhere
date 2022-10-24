@@ -11,7 +11,7 @@ replicaCount: 2
 image:
   repository: "joycelulu/opensearch-dashboards"
   # override image tag, which is .Chart.AppVersion by default
-  tag: "2.3.0"
+  tag: "2.3.1"
   pullPolicy: "IfNotPresent"
 
 imagePullSecrets: []
