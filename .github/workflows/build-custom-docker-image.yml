@@ -13,8 +13,8 @@ jobs:
         env:
           TRACKING_ID: ${{secrets.GA_TRACKING_ID}}
         run: |
-          echo "google_analytics_plugin.trackingID: $TRACKING_ID" >> config/playground/docker/dev/extra_config/osd.yml
           chmod 755 -R config/playground/docker/dev/scripts/
+          echo "google_analytics_plugin.trackingID: $TRACKING_ID" >> config/playground/docker/dev/extra_config/osd.yml
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
