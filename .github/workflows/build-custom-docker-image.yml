@@ -8,10 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: append content
+        working-directory:
         env:
           TRACKING_ID: ${{secrets.GA_TRACKING_ID}}
         run: |
+          echo $GITHUB_WORKSPACE
+          ls -la
+          pwd
           echo "google_analytics_plugin.trackingID: $TRACKING_ID" >> config/playground/docker/dev/extra_config/osd.yml
 
   Build-Custom-Docker-Image:
@@ -19,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
