@@ -12,7 +12,7 @@ image:
   repository: "joycelulu/opensearch-dashboards"
   # override image tag, which is .Chart.AppVersion by default
   tag: "2.3.1"
-  pullPolicy: "IfNotPresent"
+  pullPolicy: "Always"
 
 imagePullSecrets: []
 nameOverride: ""
