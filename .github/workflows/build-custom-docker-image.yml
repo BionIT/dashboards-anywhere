@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: append content
+      - name: append config and custom command
         env:
           TRACKING_ID: ${{secrets.GA_TRACKING_ID}}
           PLUGINS: ${{secrets.PLUGINS}}
@@ -28,8 +28,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
+        env:
+          DOCKER_HUB_REPO: ${{secrets.DOCKER_HUB_REPO}}
+          DOCKER_HUB_TAG: ${{secrets.DOCKER_HUB_TAG}}
         run:  |
           chmod -R 777 config/playground/docker/dev/scripts/
-          docker build -t joycelulu/opensearch-dashboards:2.3.1 config/playground/docker/dev
-          docker push joycelulu/opensearch-dashboards:2.3.1
+          docker build -t $DOCKER_HUB_REPO:$DOCKER_HUB_TAG config/playground/docker/dev
+          docker push $DOCKER_HUB_REPO:$DOCKER_HUB_TAG
 

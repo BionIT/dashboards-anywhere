@@ -4,8 +4,8 @@ import os
 import sys
 
 def run():
-    source_file="/opt/opensearch-dashboards/extra_config/osd.yml"
-    target_file="/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml"
+    source_file = "/opt/opensearch-dashboards/extra_config/osd.yml"
+    target_file = "/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml"
 
     s_keys = set()
     nc = []
@@ -24,7 +24,7 @@ def run():
             if len(kv) < 2 or r.strip().startswith("#"):
                 nt += [r]
             elif kv[0] in s_keys:
-                #skip
+                # skip to use src value
                 continue
             else:
                 nt += [r]
