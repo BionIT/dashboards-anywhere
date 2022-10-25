@@ -26,7 +26,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        ref: 'googleanalytics'
 
       - name: Step 1 - Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
