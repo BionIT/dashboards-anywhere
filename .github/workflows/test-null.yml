@@ -1,0 +1,22 @@
+name: Test Deployment Template
+
+on:
+  workflow_call:
+    secrets:
+      ga-tracking-id:
+        required: false
+
+jobs:
+
+  OS-OSD-Deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check whats in here
+        env:
+          BLA: ${{ secrets.ga-tracking-id }}
+        run: |
+          echo $BLA
+          if [[ $BLA ]]; then
+            echo "here"
+          fi

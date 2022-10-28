@@ -1,0 +1,14 @@
+name: OpenSearch Dashboards Build Custom Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Build-Custom-Docker-Image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name:
+        uses: BionIT/dashboards-anywhere/.github/workflows/test-null.yml@test
+        secrets:
+          ga-tracking-id: ${{ secrets.GA_TRACKING_ID }}
