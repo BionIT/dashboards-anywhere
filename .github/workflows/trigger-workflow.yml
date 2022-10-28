@@ -8,9 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ding
+        run: |
+          echo "hey"
 
   Test-Image:
     needs: Pre-Deployment
     uses: BionIT/dashboards-anywhere/.github/workflows/test-null.yml@test
     secrets:
       ga-tracking-id: ${{ secrets.GA_TRACKING_ID }}
+      not-exist: ${{ secrets.NOT_EXIST }}

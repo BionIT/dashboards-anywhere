@@ -5,6 +5,8 @@ on:
     secrets:
       ga-tracking-id:
         required: false
+      not-exist:
+        required: false
 
 jobs:
 
@@ -15,8 +17,12 @@ jobs:
       - name: check whats in here
         env:
           BLA: ${{ secrets.ga-tracking-id }}
+          NOT_EXIST: ${{ secrets.not-exist }}
         run: |
           echo $BLA
           if [[ $BLA ]]; then
             echo "here"
+          fi
+          if [[ $NOT_EXIST ]];then
+            echo "should not be here"
           fi
