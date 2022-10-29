@@ -43,7 +43,7 @@ jobs:
         uses: BionIT/dashboards-action@test
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kube-config }}
-          TRACKING_ID: ${{ secrets.ga-tracking-id }}
+          TRACKING_ID: ${{ inputs.test-id }}
         with:
           plugins: "" # optional, list of Helm plugins. eg. helm-secrets or helm-diff.
           # Teardown the current OS and OSD and then install the lastest version
@@ -60,8 +60,7 @@ jobs:
             helm install opensearch opensearch/opensearch -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch.yaml
             args=""
             echo ${{ inputs.test-id }}
-            new_var=$(echo $TRACKING_ID | base64 -d)
-            echo $new_var
+            echo $TRACKING_ID
             if [[ $TRACKING_ID ]]; then
               echo 'here'
               args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$TRACKING_ID"''
