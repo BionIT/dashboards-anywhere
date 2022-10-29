@@ -36,6 +36,7 @@ jobs:
     with:
       helm-repo: https://opensearch-project.github.io/helm-charts/
       deploy-env: dev
+      test-id: 123
     secrets:
       access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
       secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
