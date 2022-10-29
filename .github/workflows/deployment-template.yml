@@ -12,6 +12,9 @@ on:
       test-id:
         required: false
         type: string
+      random-id:
+        required: false
+        type: string
     secrets:
       access-key-id:
         required: true
@@ -60,6 +63,7 @@ jobs:
             args=""
             echo ${{inputs.test-id}}
             if [[ ${{inputs.test-id}}}} ]]; then
-              args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"${{inputs.test-id}}"''
+              args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"${{inputs.random-id}}"''
             fi
+            echo $args
             helm install dashboards opensearch/opensearch-dashboards -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml $args
