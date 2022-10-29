@@ -8,6 +8,9 @@ on:
   # adds workflow_dispatch for manually running a workflow
   workflow_dispatch:
 
+env:
+  GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+
 jobs:
 
   Pre-Deployment:
@@ -36,13 +39,12 @@ jobs:
     with:
       helm-repo: https://opensearch-project.github.io/helm-charts/
       deploy-env: dev
-      test-id: 123
+      test-id: $GA_TRACKING_ID
     secrets:
       access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
       secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
       region: ${{ secrets.AWS_REGION_DEV }}
       kube-config: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
-      ga-tracking-id: ${{ secrets.GA_TRACKING_ID }}
 
 #  OS-OSD-Prod-Deployment:
 #    needs: Pre-Deployment
