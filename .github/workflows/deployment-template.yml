@@ -59,12 +59,9 @@ jobs:
             kubectl delete pvc --all
             helm install opensearch opensearch/opensearch -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch.yaml
             args=""
-            echo ${{ inputs.test-id }}
             new_var=$(echo ${{ secrets.ga-tracking-id }} | base64 -d)
             echo $new_var
-            if [[ $TRACKING_ID ]]; then
-              echo 'here'
-              args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$TRACKING_ID"''
+            if [[ $new_var ]]; then
+              args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$new_var"''
             fi
-            echo 'will print'
             helm install dashboards opensearch/opensearch-dashboards -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml $args
