@@ -11,6 +11,7 @@ on:
         type: string
       test-id:
         required: false
+        type: string
     secrets:
       access-key-id:
         required: true
