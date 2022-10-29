@@ -33,10 +33,12 @@ jobs:
     needs: Pre-Deployment
     if:  ${{ needs.Pre-Deployment.outputs.config_change_dev == 'true' }}
     uses:  BionIT/dashboards-anywhere/.github/workflows/deployment-template.yml@debug1
+    env:
+      TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
     with:
       helm-repo: https://opensearch-project.github.io/helm-charts/
       deploy-env: dev
-      test-id: ${{ secrets.GA_TRACKING_ID }}
+      test-id: $TRACKING_ID
     secrets:
       access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
       secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
