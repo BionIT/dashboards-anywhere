@@ -31,10 +31,10 @@ jobs:
 
   OS-OSD-Dev-Deployment:
     needs: Pre-Deployment
-    if:  ${{ needs.Pre-Deployment.outputs.config_change_dev == 'true' }}
-    uses:  BionIT/dashboards-anywhere/.github/workflows/deployment-template.yml@debug1
     env:
       TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+    if:  ${{ needs.Pre-Deployment.outputs.config_change_dev == 'true' }}
+    uses:  BionIT/dashboards-anywhere/.github/workflows/deployment-template.yml@debug1
     with:
       helm-repo: https://opensearch-project.github.io/helm-charts/
       deploy-env: dev
