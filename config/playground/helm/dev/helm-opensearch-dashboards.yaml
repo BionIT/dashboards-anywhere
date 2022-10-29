@@ -124,8 +124,8 @@ ingress:
 
 resources:
   requests:
-    cpu: "1"
-    memory: "8G"
+    cpu: "0.5"
+    memory: "0.5G"
   limits:
     cpu: "3"
     memory: "24G"

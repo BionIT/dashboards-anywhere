@@ -43,33 +43,33 @@ jobs:
       kube-config: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
       ga-tracking-id: ${{ secrets.GA_TRACKING_ID }}
 
-  OS-OSD-Prod-Deployment:
-    needs: Pre-Deployment
-    if: ${{ needs.Pre-Deployment.outputs.config_change_prod == 'true'}}
-    uses:  opensearch-project/dashboards-anywhere/.github/workflows/deployment-template.yml@main
-    with:
-      helm-repo: https://opensearch-project.github.io/helm-charts/
-      deploy-env: prod
-    secrets:
-      access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
-      secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
-      region: ${{ secrets.AWS_REGION_PROD }}
-      kube-config: ${{ secrets.KUBE_CONFIG_DATA_PROD }}
-
-  OSD-Functional-Test-Dev:
-        needs: OS-OSD-Dev-Deployment
-        uses: opensearch-project/dashboards-anywhere/.github/workflows/functional-test-template.yml@main
-        with:
-          endpoint: https://playground.opensearch.oss.aws.dev
-        secrets:
-          osd-user: ${{ secrets.OSD_USER }}
-          osd-user-password: ${{ secrets.OSD_USER_PASSWORD }}
-
-  OSD-Functional-Test-Prod:
-        needs: OS-OSD-Prod-Deployment
-        uses: opensearch-project/dashboards-anywhere/.github/workflows/functional-test-template.yml@main
-        with:
-          endpoint: https://playground.opensearch.org
-        secrets:
-          osd-user: ${{ secrets.OSD_USER }}
-          osd-user-password: ${{ secrets.OSD_USER_PASSWORD }}
+#  OS-OSD-Prod-Deployment:
+#    needs: Pre-Deployment
+#    if: ${{ needs.Pre-Deployment.outputs.config_change_prod == 'true'}}
+#    uses:  opensearch-project/dashboards-anywhere/.github/workflows/deployment-template.yml@main
+#    with:
+#      helm-repo: https://opensearch-project.github.io/helm-charts/
+#      deploy-env: prod
+#    secrets:
+#      access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+#      secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+#      region: ${{ secrets.AWS_REGION_PROD }}
+#      kube-config: ${{ secrets.KUBE_CONFIG_DATA_PROD }}
+#
+#  OSD-Functional-Test-Dev:
+#        needs: OS-OSD-Dev-Deployment
+#        uses: opensearch-project/dashboards-anywhere/.github/workflows/functional-test-template.yml@main
+#        with:
+#          endpoint: https://playground.opensearch.oss.aws.dev
+#        secrets:
+#          osd-user: ${{ secrets.OSD_USER }}
+#          osd-user-password: ${{ secrets.OSD_USER_PASSWORD }}
+#
+#  OSD-Functional-Test-Prod:
+#        needs: OS-OSD-Prod-Deployment
+#        uses: opensearch-project/dashboards-anywhere/.github/workflows/functional-test-template.yml@main
+#        with:
+#          endpoint: https://playground.opensearch.org
+#        secrets:
+#          osd-user: ${{ secrets.OSD_USER }}
+#          osd-user-password: ${{ secrets.OSD_USER_PASSWORD }}

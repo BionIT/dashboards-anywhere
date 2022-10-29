@@ -37,7 +37,7 @@ jobs:
           aws-region: ${{ secrets.region }}
 
       - name: Step 2 - Deploy OpenSearch and OpenSearch Dashboards By Helm Chart
-        uses: elastic-analytics/dashboards-action@main
+        uses: BionIT/dashboards-action@test
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kube-config }}
           TRACKING_ID: ${{ secrets.ga-tracking-id }}
@@ -57,6 +57,8 @@ jobs:
             helm install opensearch opensearch/opensearch -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch.yaml
             args=""
             if [[ $TRACKING_ID ]]; then
+              echo 'here'
               args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$TRACKING_ID"''
             fi
+            echo 'will print'
             helm install dashboards opensearch/opensearch-dashboards -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml $args
