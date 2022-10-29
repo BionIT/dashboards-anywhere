@@ -9,12 +9,6 @@ on:
       deploy-env:
         required: true
         type: string
-      test-id:
-        required: false
-        type: string
-      random-id:
-        required: false
-        type: string
     secrets:
       access-key-id:
         required: true
@@ -46,6 +40,7 @@ jobs:
         uses: BionIT/dashboards-action@test
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kube-config }}
+          SOME_OTHER: 123
         with:
           plugins: "" # optional, list of Helm plugins. eg. helm-secrets or helm-diff.
           # Teardown the current OS and OSD and then install the lastest version
@@ -60,6 +55,9 @@ jobs:
             helm uninstall dashboards --namespace default
             kubectl delete pvc --all
             helm install opensearch opensearch/opensearch -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch.yaml
-            args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"${{inputs.random-id}}"''
-            echo $args
+            args=""
+            echo $SOME_OTHER
+            if [[ ${{inputs.test-id}}}} ]]; then
+              args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$SOME_OTHER"''
+            fi
             helm install dashboards opensearch/opensearch-dashboards -f config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml $args
