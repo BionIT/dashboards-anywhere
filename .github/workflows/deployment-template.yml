@@ -56,4 +56,6 @@ jobs:
             echo $SOME_OTHER
             args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$SOME_OTHER"''
             tail config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml
-            python config/playground/helm/scripts/parse_yaml.py
+            if [[ $SOME_OTHER ]]; then
+              python config/playground/helm/scripts/parse_yaml.py
+            fi
