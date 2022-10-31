@@ -40,7 +40,7 @@ jobs:
         uses: BionIT/dashboards-action@test
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kube-config }}
-          SOME_OTHER: 123
+          SOME_OTHER: ${{ secrets.ga-tracking-id }}
         with:
           plugins: "" # optional, list of Helm plugins. eg. helm-secrets or helm-diff.
           # Teardown the current OS and OSD and then install the lastest version
