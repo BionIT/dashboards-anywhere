@@ -36,6 +36,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.secret-access-key }}
           aws-region: ${{ secrets.region }}
 
+      - name: write secret
+        env:
+          TRACKING_ID: ${{ secrets.ga-tracking-id }}
+        run: |
+          echo config."opensearch_dashboards.yml".google_analytics_plugin.trackingID:$TRACKING_ID >> config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml
+
       - name: Step 2 - Deploy OpenSearch and OpenSearch Dashboards By Helm Chart
         uses: BionIT/dashboards-action@test
         env:
@@ -49,7 +55,5 @@ jobs:
           command: |
             echo $SOME_OTHER
             args='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$SOME_OTHER"''
-            echo $args
-            echo $SOME_OTHER >> config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml
             tail config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml
             python config/playground/helm/scripts/parse_yaml.py
