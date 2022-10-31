@@ -52,4 +52,4 @@ jobs:
             echo $args
             echo $SOME_OTHER >> config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml
             tail config/playground/helm/${{inputs.deploy-env}}/helm-opensearch-dashboards.yaml
-            python config/playground/helm/scrips/parse_yaml.py
+            python config/playground/helm/scripts/parse_yaml.py
