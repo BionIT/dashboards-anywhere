@@ -51,6 +51,6 @@ jobs:
             if [[ $SOME_OTHER ]]; then
               ARGS='--set config."opensearch_dashboards\.yml"."google_analytics_plugin\.trackingID"='"$SOME_OTHER"''
             fi
-            if [[ $ARGS ]]; then
+            if [[ ARGS ]]; then
                 python config/playground/helm/scripts/parse_yaml.py
             fi
